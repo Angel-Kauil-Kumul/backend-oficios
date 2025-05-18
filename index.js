@@ -81,6 +81,17 @@ app.get('/api/departamentos', async (req, res) => {
 
 app.use('/api/empleados', empleadoRoutes);
 
+app.get('/usuarios', async (req, res) => {
+  try {
+    const usuarios = await Usuario.findAll();
+    res.json(usuarios);
+  } catch (err) {
+    console.error('❌ Error al obtener usuarios:', err);
+    res.status(500).json({ error: 'Error al obtener usuarios' });
+  }
+});
+
+
 // 🚀 Iniciar servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
